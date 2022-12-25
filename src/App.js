@@ -13,7 +13,7 @@ function App() {
 		<BrowserRouter>
 			<Suspense fallback={'load'}>
 				<Routes>
-					<Route path="/signin" element={<SignInPage />} />
+					<Route path="/" element={<SignInPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
 					<Route path="/main" element={<MainPage />} />
 					<Route path="/admin" element={<AdminPage />} />

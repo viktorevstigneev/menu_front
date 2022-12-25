@@ -49,7 +49,7 @@ const SignUp = () => {
 						sign up
 					</button>
 
-					<Link className="auth__link" to="/signin">
+					<Link className="auth__link" to="/">
 						already have profile? Sign in
 					</Link>
 				</form>

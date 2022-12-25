@@ -44,7 +44,7 @@ const Header = () => {
 					</Link> : null}
 					<Link
 						className="header__link"
-						to="/signin"
+						to="/"
 						onClick={(evt) => {
 							axios.post(`${API_URL}/logout`);
 						}}
