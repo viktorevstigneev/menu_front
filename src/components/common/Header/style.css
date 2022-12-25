@@ -1,0 +1,38 @@
+.header {
+	background: rgba(255, 255, 255, 0.644);
+	padding: 5px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+.header__container {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header__logo {
+	width: 35px;
+	height: 50px;
+}
+.header__nav {
+	display: flex;
+	justify-content: space-around;
+}
+.header__link {
+	background: #38404a;
+	color: white;
+	width: 35px;
+	height: 35px;
+	display: block;
+	border-radius: 100px;
+	margin-left: 10px;
+}
+
+.header__icon {
+	width: 35px;
+	height: 35px;
+}

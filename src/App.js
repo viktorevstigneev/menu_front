@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+
+const SignInPage = lazy(() => import('./components/pages/SignIn'));
+const SignUpPage = lazy(() => import('./components/pages/Signup'));
+const MainPage = lazy(() => import('./components/pages/MainPage'));
+const AdminPage = lazy(() => import('./components/pages/AdminPanel'));
+const ContactPage = lazy(() => import('./components/pages/ContactPage'));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Suspense fallback={'load'}>
+				<Routes>
+					<Route path="/signin" element={<SignInPage />} />
+					<Route path="/signup" element={<SignUpPage />} />
+					<Route path="/main" element={<MainPage />} />
+					<Route path="/admin" element={<AdminPage />} />
+					<Route path="/contact" element={<ContactPage />} />
+				</Routes>
+				{/* <Navigate  to="/main" /> */}
+			</Suspense>
+		</BrowserRouter>
+	);
 }
 
 export default App;

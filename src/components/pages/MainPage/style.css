@@ -1,0 +1,127 @@
+.home {
+	background: url('../../../img/header_bg.png') 50% no-repeat;
+	background-size: cover;
+	height: 800px;
+}
+
+.home__img {
+	position: relative;
+	top: 40%;
+	left: 50%;
+	transform: translateY(-50%);
+	animation-name: Appearance;
+	animation-duration: 3s;
+	animation-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0);
+}
+
+@keyframes Appearance {
+	0% {
+		top: -300px;
+	}
+	100% {
+		top: 40%;
+	}
+}
+
+.home_container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.home__top {
+	margin: 0 auto;
+	margin-top: 35px;
+	width: 70%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.home__button {
+	background: #d1a379;
+	padding: 25px 100px;
+	color: #fff;
+	font-size: 48px;
+	border: none;
+	box-shadow: 4px 8px 0px 0px rgba(122, 122, 122, 0.473);
+}
+
+/* Кнопка выпадающего списка */
+.dropbtn {
+	background: #d1a379;
+	padding: 15px 50px;
+	color: #fff;
+	font-size: 28px;
+	border: none;
+	box-shadow: 4px 8px 0px 0px rgba(122, 122, 122, 0.473);
+	transition: 1s;
+	cursor: pointer;
+}
+
+/* Контейнер <div> - необходим для размещения выпадающего содержимого */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+/* Выпадающее содержимое (скрыто по умолчанию) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	transition: 1s;
+}
+
+/* Ссылки внутри выпадающего списка */
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Изменение цвета выпадающих ссылок при наведении курсора */
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+/* Показать выпадающее меню при наведении курсора */
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+.dropdown:hover .dropbtn {
+	background-color: #c58b71;
+}
+
+.colors__content,
+.type__content {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.color__item {
+	cursor: pointer;
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 100px;
+}
+
+.type__img {
+	width: 50px;
+	height: 50px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.clear {
+	font-size: 26px;
+	color: red;
+	cursor: pointer;
+}
