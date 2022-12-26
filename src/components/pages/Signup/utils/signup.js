@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { API_URL } from '../../../../constants';
 
-const signIn = ({ formData, setUser }) => {
+const signUp = ({ formData, setUser }) => {
 	axios({
 		method: 'POST',
 		data: {
@@ -21,4 +21,4 @@ const signIn = ({ formData, setUser }) => {
 		});
 };
 
-export default signIn;
+export default signUp;
