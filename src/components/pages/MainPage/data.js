@@ -64,7 +64,6 @@ export const IMAGES_BAR = [
 ];
 
 export const COLORS_FILTER = [
-
 	{
 		name: 'black',
 		hex: '#000',
@@ -84,6 +83,18 @@ export const COLORS_FILTER = [
 	{
 		name: 'yellow',
 		hex: '#fffb00',
+	},
+	{
+		name: 'violet',
+		hex: '#6002d4',
+	},
+	{
+		name: 'grey',
+		hex: '#706f70',
+	},
+	{
+		name: 'beige',
+		hex: '#ffce80',
 	},
 ];
 

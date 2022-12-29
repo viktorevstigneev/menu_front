@@ -157,6 +157,9 @@
 .type__img-wrap{
 	width: 30px;
 	margin-right: 20px;
+	padding: 20px;
+	padding-bottom: 10px;
+	cursor: pointer;
 }
 
 .type__img-select{

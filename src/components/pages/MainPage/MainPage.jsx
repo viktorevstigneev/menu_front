@@ -2,21 +2,27 @@ import React, { useEffect, useState } from 'react';
 
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
-import Slider from '../../common/Slider';
+// import home from '../../common/home';
+import html2canvas from 'html2canvas';
 
-import homeImg from '../../../img/mini_menu.png';
 import { COLORS_FILTER, TYPE_FILTER } from './data';
 import './style.css';
 import { API_URL } from '../../../constants';
+import filt from '../../../img/filt.png';
 import axios from 'axios';
 
 const MainPage = () => {
 	const [color, setColor] = useState();
 	const [type, setType] = useState();
 	const [menus, setMenus] = useState();
-	console.log('menus: ', menus);
+
 	const IMAGES_BAR = menus && menus?.filter((item) => item.isBar);
 	const IMAGES_RESTAURANTS = menus && menus?.filter((item) => !item.isBar);
+
+	const [currentBar, setCurrentBar] = useState(IMAGES_BAR && IMAGES_BAR);
+	const [currentRest, setCurrentRest] = useState(IMAGES_RESTAURANTS && IMAGES_RESTAURANTS);
+
+	const [isBarActive, setBarActive] = useState(true);
 
 	useEffect(() => {
 		const getMenus = async () => {
@@ -27,85 +33,158 @@ const MainPage = () => {
 		getMenus();
 	}, []);
 
-	let filteredMenuRest = IMAGES_RESTAURANTS && IMAGES_RESTAURANTS.filter(
-		(item) => item.color === color || item.type === type || color === 'all'
-	);
-	console.log('filteredMenuRest: ', filteredMenuRest);
-	let filteredMenuBar = IMAGES_BAR && IMAGES_BAR.filter((item) => item.type === type || item.color === color);
-	console.log('filteredMenuBar: ', filteredMenuBar);
+	useEffect(() => {
+		setCurrentBar(IMAGES_BAR);
+		setCurrentRest(IMAGES_RESTAURANTS);
+	}, [menus]);
+
+	const download = function (canvas) {
+		const link = document.createElement('a');
+		link.download = 'menu.png';
+		link.href = canvas.toDataURL();
+		link.click();
+	};
 
 	return (
 		<>
-			<div className="home">
-				<Header />
-				<img className="home__img" src={homeImg} alt="" />
-			</div>
 			<main className="home__main">
+				<Header />
+				<div className="home__toppanel">
+					<div className="filtering_btn">
+						<img className="filt" src={filt} alt="d" />
+						Filtering
+					</div>
+					<div
+						className="restaurant_btn"
+						onClick={() => {
+							setBarActive(false);
+						}}
+					>
+						Restaurants
+					</div>
+					<div
+						className="bar_btn"
+						onClick={() => {
+							setBarActive(true);
+						}}
+					>
+						Bars
+					</div>
+				</div>
 				<div className="home_container">
-					<div className="home__top">
-						<div className="dropdown">
-							<button className="dropbtn">Colors</button>
-							<div className="dropdown-content">
-								<p className="filter__title">Colors</p>
-								<div className="colors__content">
-									<div
-										className="clear"
-										onClick={() => {
-											setColor();
-										}}
-									>
-										&times;
-									</div>
-									{COLORS_FILTER.map((color) => (
-										<div
-											className="color__item"
-											key={color.name}
-											onClick={() => {
-												setColor(color.name);
-											}}
-											style={{ background: color.hex }}
-										></div>
-									))}
-								</div>
-							</div>
-						</div>
-						<div className="dropdown">
-							<button className="dropbtn">Menu type</button>
-							<div className="dropdown-content">
-								<p className="filter">filter by type</p>
-								<div className="type__content">
-									<div
-										className="clear"
-										onClick={() => {
-											setType();
-										}}
-									>
-										&times;
-									</div>
-									{TYPE_FILTER.map((item, index) => (
+					<div className="home__left">
+						<div className="home__filter">
+							<p className="filter__title">Type menu</p>
+							<div className="filter__content">
+								{TYPE_FILTER.map((item, index) => (
+									<div className="type__wrapper">
+										<div className="type__checkbox" style={{ background: type === item.type ? '#8f8f8f' : '' }}></div>
 										<img
 											className="type__img"
 											key={index}
 											src={item.img}
 											onClick={() => {
 												setType(item.type);
+												setCurrentBar(IMAGES_BAR && IMAGES_BAR.filter((menu) => menu.typeThing === item.type));
+												setCurrentRest(
+													IMAGES_RESTAURANTS && IMAGES_RESTAURANTS.filter((menu) => menu.typeThing === item.type)
+												);
 											}}
 											alt="type"
 										/>
-									))}
-								</div>
+									</div>
+								))}
 							</div>
+							<button
+								className="filter__clear"
+								onClick={() => {
+									setType();
+									setCurrentBar(IMAGES_BAR);
+									setCurrentRest(IMAGES_RESTAURANTS);
+								}}
+							>
+								Reset filtering
+							</button>
+						</div>
+						<div className="home__filter">
+							<p className="filter__title">Colors</p>
+							<div className="filter__content--color">
+								{COLORS_FILTER.map((item, index) => (
+									<div
+										className="color__box"
+										style={{
+											background: item.hex,
+											boxShadow: color === item.name ? '0px 1px 2px 3px #ffffff inset' : '',
+										}}
+										onClick={() => {
+											setColor(item.name);
+											setCurrentBar(currentBar && currentBar.filter((menu) => menu.color === item.name));
+											setCurrentRest(
+												IMAGES_RESTAURANTS && IMAGES_RESTAURANTS.filter((menu) => menu.color === item.name)
+											);
+										}}
+									></div>
+								))}
+							</div>
+							<button
+								className="filter__clear"
+								onClick={() => {
+									setColor();
+									setCurrentBar(IMAGES_BAR);
+									setCurrentRest(IMAGES_RESTAURANTS);
+								}}
+							>
+								Reset filtering
+							</button>
 						</div>
 					</div>
+					<div className="home_right">
+						{isBarActive && currentBar && currentBar.length ? (
+							currentBar.map((item, index) => (
+								<div className="home__wrapper">
+									<img className="home__image" key={index} src={`${API_URL}/getImage/${item.avatar}`} alt="travel" />
+									<div
+										className="home__download"
+										onClick={() => {
+											html2canvas(document.querySelector('.home__image'), {
+												allowTaint: true,
+												useCORS: true,
+											}).then((canvas) => {
+												download(canvas);
+											});
+										}}
+									>
+										Download
+									</div>
+								</div>
+							))
+						) : (
+							null
+						)}
+						{!isBarActive && currentRest && currentRest.length ? (
+							currentRest.map((item, index) => (
+								<div className="home__wrapper">
+									<img className="home__image" key={index} src={`${API_URL}/getImage/${item.avatar}`} alt="travel" />
+									<div
+										className="home__download"
+										onClick={() => {
+											html2canvas(document.querySelector('.home__image'), {
+												allowTaint: true,
+												useCORS: true,
+											}).then((canvas) => {
+												download(canvas);
+											});
+										}}
+									>
+										Download
+									</div>
+								</div>
+							))
+						) : (
+							null
+						)}
+					</div>
 				</div>
-				<Slider
-					data={filteredMenuRest && filteredMenuRest.length ? filteredMenuRest : IMAGES_RESTAURANTS}
-					menuCount={filteredMenuRest && filteredMenuRest.length}
-				/>
-				<Slider
-					data={filteredMenuBar && filteredMenuBar.length ? filteredMenuBar : IMAGES_BAR}
-					menuCount={filteredMenuRest && filteredMenuBar.length}
-				/>
 			</main>
 			<Footer />
 		</>

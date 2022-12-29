@@ -12,6 +12,8 @@ import { COLORS_FILTER, TYPE_FILTER } from '../MainPage/data';
 
 const AdminPanel = ({}) => {
 	const [file, setFile] = useState('');
+	const [currentType, setCurrentType] = useState('card');
+	console.log('currentType: ', currentType);
 
 	return (
 		<section className="admin">
@@ -69,14 +71,29 @@ const AdminPanel = ({}) => {
 						<p className="">Choose Menu type</p>
 						<div className="type__content">
 							{TYPE_FILTER.map((item, index) => (
-								<div className="type__img-wrap" key={index}>
+								<div
+									className="type__img-wrap"
+									key={index}
+									onClick={() => {
+										setCurrentType(item.type);
+									}}
+									style={{ border: currentType === item.type ? '1px solid white' : '' }}
+								>
 									<img className="type__img-select" src={item.img} alt="type" />
 									<p className="">{item.type}</p>
 								</div>
 							))}
 						</div>
 					</label>
-					<select className="admin__text-input" name="typeThing" id="type">
+					<select
+						className="admin__text-input"
+						name="typeThing"
+						id="type"
+						value={currentType}
+						onChange={(evt) => {
+							setCurrentType(evt.target.value);
+						}}
+					>
 						<option className="option__item-type" value="card">
 							card
 						</option>

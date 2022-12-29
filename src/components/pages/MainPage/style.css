@@ -1,39 +1,54 @@
-.home {
-	background: url('../../../img/header_bg.png') 50% no-repeat;
+.home__main {
+	background: url('../../../img/main_bg.png') 50% no-repeat;
 	background-size: cover;
-	height: 800px;
 }
 
-.home__img {
-	position: relative;
-	top: 40%;
-	left: 50%;
-	transform: translateY(-50%);
-	animation-name: Appearance;
-	animation-duration: 3s;
-	animation-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0);
+.home__toppanel {
+	background: rgba(255, 255, 255, 0.644);
+	display: flex;
+	align-items: center;
+	padding-top: 20px;
+	
 }
 
-@keyframes Appearance {
-	0% {
-		top: -300px;
-	}
-	100% {
-		top: 40%;
-	}
+.filt{
+	width: 20px;
+	margin-right: 30px;
+
+}
+
+.filtering_btn {
+	padding: 10px 60px;
+	display: flex;
+	align-items: center;
+	background: #ffffff;
+	border-top-right-radius: 100px ;
+	border-bottom-right-radius: 100px ;
+}
+.restaurant_btn {
+	padding: 10px 30px;
+	background: #d1a379;
+	margin-left: 270px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.bar_btn {
+	padding: 10px 70px;
+	background: #d1a379;
+	margin-left: 70px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.bar_btn:hover, .restaurant_btn:hover{
+	background: #ffc187;
 }
 
 .home_container {
-	width: 90%;
+	/* width: 90%; */
 	margin: 0 auto;
-}
-
-.home__top {
-	margin: 0 auto;
-	margin-top: 35px;
-	width: 70%;
 	display: flex;
-	justify-content: space-between;
 }
 
 .home__button {
@@ -45,83 +60,115 @@
 	box-shadow: 4px 8px 0px 0px rgba(122, 122, 122, 0.473);
 }
 
-/* Кнопка выпадающего списка */
-.dropbtn {
-	background: #d1a379;
-	padding: 15px 50px;
-	color: #fff;
-	font-size: 28px;
-	border: none;
-	box-shadow: 4px 8px 0px 0px rgba(122, 122, 122, 0.473);
-	transition: 1s;
-	cursor: pointer;
+.home__left {
+	background: #dde0e4;
+	width: 200px;
 }
-
-/* Контейнер <div> - необходим для размещения выпадающего содержимого */
-.dropdown {
-	position: relative;
-	display: inline-block;
+.home__filter {
+	border-bottom: 1px solid #000;
+	padding: 20px;
 }
-
-/* Выпадающее содержимое (скрыто по умолчанию) */
-.dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	transition: 1s;
-}
-
-/* Ссылки внутри выпадающего списка */
-.dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-}
-
-/* Изменение цвета выпадающих ссылок при наведении курсора */
-.dropdown-content a:hover {
-	background-color: #ddd;
-}
-
-/* Показать выпадающее меню при наведении курсора */
-.dropdown:hover .dropdown-content {
-	display: block;
-}
-
-/* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
-.dropdown:hover .dropbtn {
-	background-color: #c58b71;
-}
-
-.colors__content,
-.type__content {
+.filter__content {
 	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	align-items: center;
+	flex-direction: column;
 }
 
-.color__item {
+.type__wrapper {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
 	cursor: pointer;
-	display: block;
-	width: 20px;
-	height: 20px;
+}
+
+.type__checkbox {
+	border: 1px solid black;
+	width: 15px;
+	height: 15px;
 	border-radius: 100px;
+	margin-right: 20px;
 }
 
 .type__img {
-	width: 50px;
-	height: 50px;
-	margin: 10px;
-	cursor: pointer;
+	width: 70px;
+	height: 70px;
 }
 
-.clear {
-	font-size: 26px;
-	color: red;
+.filter__clear {
+	display: block;
+	margin: 0 auto;
+	background: #c1c1c2;
+	border: none;
+	border-radius: 7px;
+	padding: 5px;
 	cursor: pointer;
+	margin-top: 5px;
+}
+
+.filter__clear:hover {
+	background: #8f8f8f;
+}
+
+.filter__content--color {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	border: 1px solid rgb(80, 80, 80);
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.color__box {
+	width: 23px;
+	height: 23px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	/* border: 2px solid rgba(0, 0, 0, 0); */
+}
+
+.home_right {
+	display: flex;
+	width: 90%;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.home__wrapper {
+	position: relative;
+	width: 250px !important;
+	height: 350px;
+	margin-left: 20px;
+	margin-bottom: 15px;
+}
+
+.home__image {
+	width: 250px;
+	height: 350px;
+}
+
+.home__download {
+	display: block;
+	width: 70%;
+	background: #38404a;
+	border-radius: 10px;
+	padding: 5px;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+
+	position: absolute;
+	bottom: 20px;
+	left: 10%;
+}
+
+.home__download:hover {
+	background: #485c75;
+}
+
+.not {
+	color: rgb(53, 53, 53);
+	font-size: 48px;
+	text-align: center;
+	padding: 20px;
 }
